@@ -1,4 +1,4 @@
-package deserialize;
+package com.easy.rpc.serialization.deserialize;
 
 import com.alibaba.fastjson.JSON;
 

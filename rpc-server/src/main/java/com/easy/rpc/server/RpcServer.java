@@ -45,8 +45,8 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         //开始监听
-        if(StringUtils.isBlank(ip) || StringUtils.isBlank(port)){
-            throw new IllegalArgumentException("ip or port can not be null");
+        if(StringUtils.isBlank(ip)){
+            throw new IllegalArgumentException("ip can not be null");
         }
 
     }

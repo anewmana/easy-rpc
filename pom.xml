@@ -10,12 +10,20 @@
     <modules>
         <module>rpc-server</module>
         <module>rpc-common</module>
+        <module>rpc-serialization</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
         <spring.context.version>4.3.8.RELEASE</spring.context.version>
         <netty.version>4.1.12.Final</netty.version>
+        <maven.compiler.version>3.6.0</maven.compiler.version>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <file.encoding>utf-8</file.encoding>
+        <fastjson.version>1.2.46</fastjson.version>
+        <cglib.version>3.3.0</cglib.version>
+        <slf4j12.version>1.7.28</slf4j12.version>
     </properties>
 
     <dependencyManagement>
@@ -28,10 +36,42 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>${netty.version}}</version>
+                <version>${netty.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j12.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${java.source.version}</source>
+                    <target>${java.target.version}</target>
+                    <encoding>${file.encoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
