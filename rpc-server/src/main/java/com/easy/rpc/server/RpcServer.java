@@ -4,6 +4,7 @@ import com.easy.rpc.common.ServiceNameConverter;
 import com.easy.rpc.common.utils.CollectionUtils;
 import com.easy.rpc.common.utils.StringUtils;
 import com.easy.rpc.server.annotion.RpcService;
+import com.easy.rpc.server.server.NettyRpcServer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -48,7 +49,9 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
         if(StringUtils.isBlank(ip)){
             throw new IllegalArgumentException("ip can not be null");
         }
-
+        //todo 解耦
+        NettyRpcServer server = new NettyRpcServer(ip, port, serviceMap);
+        server.start();
     }
 
     /**

@@ -11,6 +11,7 @@
         <module>rpc-server</module>
         <module>rpc-common</module>
         <module>rpc-serialization</module>
+        <module>rpc-demo</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -43,7 +43,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest>{
     }
 
     /**
-     * 处理请求，返回结果
+     * 处理请求
      * @param msg
      * @return
      * @throws Exception
