@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @ComponentScan(basePackages = "com.easy.rpc.demo.provider")
-@PropertySource(value = {"classpath:/spring/spring.properties", "classpath:/spring/log4j.properties"})
+@PropertySource(value = {"classpath:spring/spring.properties","classpath:spring/log4j.properties"})
 public class ProviderConfig {
 
     @Bean(name = "rpcServer")

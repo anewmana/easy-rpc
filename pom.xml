@@ -12,6 +12,7 @@
         <module>rpc-common</module>
         <module>rpc-serialization</module>
         <module>rpc-demo</module>
+        <module>rpc-client</module>
     </modules>
     <packaging>pom</packaging>
 

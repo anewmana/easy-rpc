@@ -22,4 +22,17 @@ public class ServiceNameConverter {
         return serviceName + version;
     }
 
+    /**
+     * 根据接口名和版本号获取服务的全名
+     * @param cls
+     * @param version 版本号
+     * @return 服务全名
+     */
+    public static String getFullServiceName(Class cls, String version){
+        if(cls == null){
+            throw new NullPointerException("class can not be null");
+        }
+        return getFullServiceName(cls.getName(), version);
+    }
+
 }
