@@ -1,4 +1,4 @@
-package com.easy.rpc.server.server.handler;
+package com.easy.rpc.common.handler;
 
 import com.easy.rpc.serialization.deserialize.Deserializer;
 import io.netty.buffer.ByteBuf;
@@ -9,9 +9,9 @@ import java.util.List;
 
 import static com.easy.rpc.common.constant.RpcConstant.DATA_LENGTH_IN_BYTE;
 
-public class RpcRequestDecoder extends ByteToMessageDecoder {
+public class RpcDecoder extends ByteToMessageDecoder {
 
-    public RpcRequestDecoder(Deserializer deserializer, Class cls) {
+    public RpcDecoder(Deserializer deserializer, Class cls) {
         this.deserializer = deserializer;
         this.cls = cls;
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author ljl
  * @since 2019/8/17
  */
-@RpcService(value = HelloServiceImpl.class, version = "0.1")
+@RpcService(value = HelloService.class, version = "0.1")
 @Component
 public class HelloServiceImpl implements HelloService{
 

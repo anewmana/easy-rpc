@@ -1,13 +1,14 @@
 package com.easy.rpc.server.server;
 
 import com.easy.rpc.common.entity.RpcRequest;
+import com.easy.rpc.common.entity.RpcResponse;
+import com.easy.rpc.common.handler.RpcDecoder;
+import com.easy.rpc.common.handler.RpcEncoder;
 import com.easy.rpc.serialization.deserialize.Deserializer;
 import com.easy.rpc.serialization.deserialize.JsonDeserializer;
 import com.easy.rpc.serialization.serialize.JsonSerializer;
 import com.easy.rpc.serialization.serialize.Serializer;
-import com.easy.rpc.server.server.handler.RpcHandler;
-import com.easy.rpc.server.server.handler.RpcRequestDecoder;
-import com.easy.rpc.server.server.handler.RpcResponseEncoder;
+import com.easy.rpc.server.server.handler.RpcServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -68,9 +69,9 @@ public class NettyRpcServer {
         @Override
         protected void initChannel(SocketChannel ch) throws Exception {
             ChannelPipeline pipeline = ch.pipeline();
-            pipeline.addLast(new RpcRequestDecoder(DESERIALIZER, RpcRequest.class));
-            pipeline.addLast(new RpcHandler(serviceMap));
-            pipeline.addLast(new RpcResponseEncoder(SERIALIZER));
+            pipeline.addLast(new RpcDecoder(DESERIALIZER, RpcRequest.class));
+            pipeline.addLast(new RpcServerHandler(serviceMap));
+            pipeline.addLast(new RpcEncoder(SERIALIZER, RpcResponse.class));
         }
     }
 
