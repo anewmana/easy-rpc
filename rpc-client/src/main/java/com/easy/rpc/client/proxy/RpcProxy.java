@@ -13,6 +13,6 @@ public interface RpcProxy extends Proxy {
      * @param <T>
      * @return
      */
-    <T> T createProxy(Class<T> cls, String version);
+    <T> T createProxy(Class<?> cls, String version);
 
 }

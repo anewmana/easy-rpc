@@ -47,9 +47,13 @@ public class RpcNewClient{
         ChannelFuture future = bootstrap.connect().sync();
         ChannelFuture writeFuture = future.channel().writeAndFlush(request);
         writeFuture.channel().closeFuture().sync();
-        eventLoopGroup.shutdownGracefully().sync();
-        RpcResponse rpcResponse = RpcHolder.getResponse();
+        RpcResponse rpcResponse = RpcHolder.getResponse(request.getRpcUniqueId());
+        close(eventLoopGroup);
         return rpcResponse;
+    }
+
+    private void close(EventLoopGroup eventLoopGroup){
+        eventLoopGroup.shutdownGracefully();
     }
 
 

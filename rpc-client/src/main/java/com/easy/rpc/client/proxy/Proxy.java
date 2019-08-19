@@ -12,6 +12,6 @@ public interface Proxy {
      * @param <T>
      * @return
      */
-    <T> T createProxy(Class<T> cls);
+    <T> T createProxy(Class<?> cls);
 
 }

@@ -14,14 +14,14 @@ public class NettyClientProxy implements RpcProxy {
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyClientProxy.class);
 
     @Override
-    public <T> T createProxy(Class<T> cls) {
+    public <T> T createProxy(Class<?> cls) {
         return createProxy(cls, "");
     }
 
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T createProxy(Class<T> cls, String version) {
+    public <T> T createProxy(Class<?> cls, String version) {
         version = (version == null) ? "" : version;
         return (T)Proxy.newProxyInstance(cls.getClassLoader(), new Class[]{cls}, new NettyClientInvocationHandler(cls, version));
     }

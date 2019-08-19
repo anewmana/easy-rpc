@@ -26,6 +26,8 @@ public class NettyClientInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("当前调用方法名：" + method.getName());
+        System.out.println("参数长度：" + args.length);
         RpcRequest request = buildRpcRequest(cls, method, args);
         RpcNewClient rpcClient = new RpcNewClient();
         try {
@@ -33,11 +35,10 @@ public class NettyClientInvocationHandler implements InvocationHandler {
             if(rpcResponse != null){
                 return rpcResponse.getResult();
             }
-            return null;
         } catch (InvocationTargetException e) {
             System.out.println("InvocationTargetException");
-            throw e.getCause();
         }
+        return null;
     }
 
     private RpcRequest buildRpcRequest(Class cls, Method method, Object[] args){

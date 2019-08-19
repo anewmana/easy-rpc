@@ -14,7 +14,6 @@ public class RpcCientHandler extends ChannelInboundHandlerAdapter{
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof RpcResponse){
-            System.out.println("recerve");
             RpcResponse response = (RpcResponse) msg;
             RpcHolder.setResponse(response);
         }
