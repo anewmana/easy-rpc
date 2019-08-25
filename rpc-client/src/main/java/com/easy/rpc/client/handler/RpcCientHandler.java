@@ -1,6 +1,7 @@
 package com.easy.rpc.client.handler;
 
 import com.easy.rpc.client.RpcHolder;
+import com.easy.rpc.client.RpcListener;
 import com.easy.rpc.common.entity.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -15,7 +16,10 @@ public class RpcCientHandler extends ChannelInboundHandlerAdapter{
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof RpcResponse){
             RpcResponse response = (RpcResponse) msg;
-            RpcHolder.setResponse(response);
+            String rpcUniqueId = response.getRpcUniqueId();
+            RpcListener rpcListener = RpcHolder.getListener(rpcUniqueId);
+            rpcListener.notifyWithValue(response);
+            ctx.close();
         }
     }
 

@@ -1,7 +1,6 @@
 package com.easy.rpc.client.proxy;
 
-import com.easy.rpc.client.RpcNewClient;
-import com.easy.rpc.common.ServiceNameConverter;
+import com.easy.rpc.client.RpcClient;
 import com.easy.rpc.common.entity.RpcRequest;
 import com.easy.rpc.common.entity.RpcResponse;
 
@@ -29,7 +28,7 @@ public class NettyClientInvocationHandler implements InvocationHandler {
         System.out.println("当前调用方法名：" + method.getName());
         System.out.println("参数长度：" + args.length);
         RpcRequest request = buildRpcRequest(cls, method, args);
-        RpcNewClient rpcClient = new RpcNewClient();
+        RpcClient rpcClient = new RpcClient();
         try {
             RpcResponse rpcResponse = rpcClient.invoke(request);
             if(rpcResponse != null){

@@ -10,18 +10,19 @@ import com.easy.rpc.serialization.deserialize.JsonDeserializer;
 import com.easy.rpc.serialization.serialize.JsonSerializer;
 import com.easy.rpc.serialization.serialize.Serializer;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author ljl
  * @since 2019/8/19
  */
-public class RpcNewClient{
+public class RpcClient{
 
     private static final Deserializer DESERIALIZER = new JsonDeserializer();
     private static final Serializer SERIALIZER = new JsonSerializer();
@@ -46,8 +47,11 @@ public class RpcNewClient{
 
         ChannelFuture future = bootstrap.connect().sync();
         ChannelFuture writeFuture = future.channel().writeAndFlush(request);
+        RpcListener listener = new DefaultRpcListener();
+        RpcHolder.addListener(request.getRpcUniqueId(), listener);
+        RpcResponse rpcResponse = (RpcResponse) listener.get();
+        RpcHolder.removeListener(request.getRpcUniqueId());
         writeFuture.channel().closeFuture().sync();
-        RpcResponse rpcResponse = RpcHolder.getResponse(request.getRpcUniqueId());
         close(eventLoopGroup);
         return rpcResponse;
     }

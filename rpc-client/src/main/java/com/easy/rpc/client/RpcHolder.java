@@ -1,8 +1,5 @@
 package com.easy.rpc.client;
 
-import com.easy.rpc.common.entity.RpcResponse;
-import com.easy.rpc.common.utils.StringUtils;
-
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -10,19 +7,27 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2019/8/19
  */
 public class RpcHolder {
+    private static final ConcurrentHashMap<String, RpcListener> responseListenerMap = new ConcurrentHashMap<>();
 
-    private static final ConcurrentHashMap<String, RpcResponse> responseMap = new ConcurrentHashMap<>();
-
-
-    public static RpcResponse getResponse(String id){
-        return responseMap.get(id);
+    public static RpcListener getListener(String rpcUniqueId){
+        if(rpcUniqueId == null){
+            return null;
+        }
+        return responseListenerMap.get(rpcUniqueId);
     }
 
-    public static void setResponse(RpcResponse response){
-        if(response == null || StringUtils.isBlank(response.getRpcUniqueId())){
-            return;
+    public static void addListener(String rpcUniqueId, RpcListener rpcListener){
+        if(rpcUniqueId == null || rpcListener == null){
+            throw new IllegalArgumentException("rpcUniqueId or rpcListener can not be null");
         }
-        responseMap.put(response.getRpcUniqueId(), response);
+        responseListenerMap.put(rpcUniqueId, rpcListener);
+    }
+
+    public static void removeListener(String rpcUniqueId){
+        if(rpcUniqueId == null){
+            throw new IllegalArgumentException("rpcUniqueId can not be null");
+        }
+        responseListenerMap.remove(rpcUniqueId);
     }
 
 }
