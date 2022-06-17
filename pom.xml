@@ -25,7 +25,7 @@
         <java.source.version>1.8</java.source.version>
         <java.target.version>1.8</java.target.version>
         <file.encoding>utf-8</file.encoding>
-        <fastjson.version>1.2.46</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <cglib.version>3.3.0</cglib.version>
         <slf4j12.version>1.7.28</slf4j12.version>
     </properties>
